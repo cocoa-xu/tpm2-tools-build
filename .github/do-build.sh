@@ -66,10 +66,6 @@ cd "${SRC_DIR}"
 make -j$(nproc)
 make DESTDIR="${DESTDIR}" install
 
-# Make .pc files relocatable
-cd "${DESTDIR}/usr/local/lib/pkgconfig"
-sed -i 's|^prefix=.*|prefix=${pcfiledir}/../..|' *.pc
-
 tar -C "${DESTDIR}/usr/local" -czf "${ROOTDIR}/artifact/${ARCHIVE_FILENAME}" .
 cd "${ROOTDIR}/artifact"
 shasum -a 512 "${ARCHIVE_FILENAME}" | tee "${ARCHIVE_FILENAME}.sha512"
